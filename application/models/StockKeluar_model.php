@@ -1,17 +1,20 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
 #[\AllowDynamicProperties]
-class Riwayat_model extends CI_Model
+class StockKeluar_model extends CI_Model
 {
-    public $table = 'riwayat';
-    public $id = 'riwayat.id';
+    public $table = 'stockkeluar';
+    public $id = 'stockkeluar.id';
+
     public function __construct()
     {
         parent::__construct();
     }
+
     public function get()
     {
-        $this->db->from($this->table);
+       $this->db->from($this->table);
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -22,26 +25,24 @@ class Riwayat_model extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
     public function update($where, $data)
     {
         $this->db->update($this->table, $data, $where);
         return $this->db->affected_rows();
     }
+
     public function insert($data)
     {
         $this->db->insert($this->table, $data);
         return $this->db->insert_id();
     }
+
     public function delete($id)
     {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
 
-        if ($this->db->error()) {
-            return $this->db->error();
-        }
-
         return $this->db->affected_rows();
     }
-
 }

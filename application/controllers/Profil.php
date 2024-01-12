@@ -28,52 +28,57 @@ class Profil extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i
             class="icon fas fa-check-circle"></i>Data Prodi Berhasil Dihapus!</div>');
         }
-        redirect('Prodi');
+        redirect('Profil');
     }
     public function edit($id)
     {
-            $data['judul']="Halaman Edit Stock Barang";
-            $data['user']= $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-            $data['profil'] = $this->Profil_model->get();
-            $data['profil'] = $this->Profil_model->getById($id);
-            $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required', [
-                'required' => 'Nama Lengkap Wajib di isi'
-            ]);
-            $this->form_validation->set_rules('email', 'Email', 'required', [
-                'required' => 'Email Wajib di isi'
-            ]);
-
-            if ($this->form_validation->run() == FALSE) {
-                $this->load->view("layout/header", $data);
-                $this->load->view("Profil/vw_edit_profile", $data);
-                $this->load->view("layout/footer", $data);
-            } else {
-                $data = [
-                    'nama' => $this->input->post('nama'),
-                    'email' => $this->input->post('email'),
-                ];
-                $upload_image = $_FILES['gambar']['name'];
-                $ext = pathinfo($upload_image, PATHINFO_EXTENSION);
-                if ($upload_image){
-                    $config['allowed_types'] = 'gif|jpg|png';
-                    $config['max_size']='2048';
-                    $config['upload_path'] = './assets/img/stock/';
-                    $this->load->library('upload', $config);
-                    if ($this->upload->do_upload('gambar')){
-                        $new_image = $this->upload->data('file_name');
-                        $this->db->set('gambar', $new_image);
-                    } else {
-                        echo $this->upload->display_errors();
-                    }
+        $data['judul'] = "Halaman Edit Profile";
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['profil'] = $this->Profil_model->getById($id);
+    
+        $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required', [
+            'required' => 'Nama Lengkap Wajib di isi'
+        ]);
+        $this->form_validation->set_rules('email', 'Email', 'required', [
+            'required' => 'Email Wajib di isi'
+        ]);
+    
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view("layout/header", $data);
+            $this->load->view("Profil/vw_edit_profile", $data);
+            $this->load->view("layout/footer", $data);
+        } else {
+            $dataToUpdate = [
+                'nama' => $this->input->post('nama'),
+                'email' => $this->input->post('email'),
+            ];
+    
+            $upload_image = $_FILES['gambar']['name'];
+    
+            if ($upload_image) {
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size'] = '2048';
+                $config['upload_path'] = './assets/img/stock/';
+                $this->load->library('upload', $config);
+    
+                if ($this->upload->do_upload('gambar')) {
+                    $new_image = $this->upload->data('file_name');
+                    $dataToUpdate['gambar'] = $new_image;
+                } else {
+                    $error = $this->upload->display_errors();
+                    echo $error; // Handle the error as needed
+                    return;
                 }
-                $id = $this->input->post('id');
-                $this->Profil_model->update(['id' => $id], $data, $upload_image);
-                $this->Profil_model->update(['id' => $id], $data);
-                $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
-                Data Profile Berhasil Diubah!</div>');
-                redirect('Profil');
             }
+    
+            $id = $this->input->post('id');
+            $this->Profil_model->update(['id' => $id], $dataToUpdate);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Profile Berhasil Diubah!</div>');
+            redirect('Profil');
+        }
     }
+    
     
 
 }

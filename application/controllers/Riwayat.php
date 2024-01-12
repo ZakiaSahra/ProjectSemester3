@@ -13,7 +13,8 @@ class Riwayat extends CI_Controller
   {
     $data['judul'] = 'Riwayat';
     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-    $data['riwayat'] = $this->Riwayat_model->get();
+    // $data['riwayat'] = $this->Riwayat_model->get();
+    $data['riwayat'] = $this->db->query("select *, 'masuk' status from stock  union  select *, 'keluar' status from stockkeluar")->result_array();
     $this->load->view("layout/header", $data);
     $this->load->view("riwayat/vw_riwayat", $data);
     $this->load->view("layout/footer", $data);

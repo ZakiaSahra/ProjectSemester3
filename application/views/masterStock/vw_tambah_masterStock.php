@@ -4,7 +4,7 @@
             <h1 class="mt-4">Stock Barang Terpentol</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="<?= base_url('Profil') ?>">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="<?= base_url('Stock') ?>">Stock</a></li>
+                <li class="breadcrumb-item active"><a href="<?= base_url('MasterStock') ?>">Stock</a></li>
                 <li class="breadcrumb-item active">Tambah</li>
             </ol>
             <h1 class="h3 mb-4 text-gray-800"><?php echo $judul; ?></h1>
@@ -16,15 +16,14 @@
                         <div class="card-header justify-content-center">
                             Form Tambah Stock Barang
                         </div>
-                        
-                        <div class="card-body">
-                            <form action="" method="POST" enctype="multipart/form-data">
-                            <div class="form-group">
+                        <!-- <div class="form-group">
                                     <label for="tanggal">Tanggal</label>
                                     <input type="date" name="tanggal" class="form-control"
                                         value="<?= set_value('tanggal') ?>" id="tanggal" placeholder="Tanggal">
                                     <?= form_error('tanggal', '<small class="text-danger p1-3">', '</small>'); ?>
-                                </div>  
+                                </div>   -->
+                        <div class="card-body">
+                            <form action="" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="nama_instansi">Nama Barang</label>
                                     <input type="text" name="nama_barang" class="form-control" 
@@ -69,7 +68,7 @@
                                     <?= form_error('total_bungkus', '<small class="text-danger p1-3">', '</small>'); ?>
                                 </div>
     
-                                <a href="<?= base_url('Stock') ?>" class="btn btn-danger">Tutup</a>
+                                <a href="<?= base_url('MasterStock') ?>" class="btn btn-danger">Tutup</a>
                                 <button type="submit" name="tambah" class="btn btn-primary float-right">Tambah</button>
                             </form>
                         </div>

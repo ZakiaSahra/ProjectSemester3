@@ -68,10 +68,22 @@
                         <div class="sb-sidenav-menu-heading text-warning">Menu</div>
                         <?php
                         if ($user['role'] == 'Admin') { ?>
+                         <li class="nav-item">
+                                <a class="nav-link text-warning text-center" href="<?= site_url('masterStock/') ?>">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                    <span>Stock</span>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-warning text-center" href="<?= site_url('Stock/') ?>">
                                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                    <span>Stock</span>
+                                    <span>Barang Masuk</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-warning text-center" href="<?= site_url('StockKeluar/') ?>">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                    <span>Barang Keluar</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -80,6 +92,8 @@
                                     <span>Riwayat</span>
                                 </a>
                             </li>
+                           
+
                         <?php } else {
                             ?>
                             <?php

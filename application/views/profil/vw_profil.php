@@ -11,10 +11,10 @@
 			</h1>
 		</div>
 		<div class="container-fluid">
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-md-6"><a href="<?= base_url('Profil/edit') ?>" class="btn btn-info mb-2">Edit Profile</a>
 				</div>
-			</div>
+			</div> -->
 			<div class="card mb-3" style="max-width: 900px;">
 				<div class="row no-gutters">
 					<div class="col-md-4">
